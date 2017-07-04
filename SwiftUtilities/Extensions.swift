@@ -130,6 +130,31 @@ extension Dictionary {
     }
 }
 
+extension Dictionary where Key == String, Value == Value {
+    var queryString: String {
+        return self.reduce("") { (previous, tupple: (key: String, value: Any)) -> String in
+            if previous.characters.count == 0 {
+                return previous + "\(tupple.key)=\(tupple.value)"
+            }
+            return previous + "&\(tupple.key)=\(tupple.value)"
+        }
+    }
+}
+
+extension Bool {
+    var stringValue: String {
+        return self ? "true" : "false"
+    }
+    
+    init(stringValue: String) {
+        if stringValue == "true" {
+            self = true
+        } else {
+            self = false
+        }
+    }
+}
+
 extension UIViewController {
     
     /// Add a child view controller in a given container view
