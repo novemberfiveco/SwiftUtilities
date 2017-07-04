@@ -15,12 +15,12 @@ class SwiftBeaverLoggerService: NSObject, APLoggerService {
     
     let beaverLog = SwiftyBeaver.self
     
-    override init() {
+    init(appID: String, appSecret: String, encryptionKey: String) {
         super.init()
         
         // SwiftyBeaver
-        let cloud = SBPlatformDestination(appID: "zLgzkM", appSecret: "a9tcvnK3reshGgwMd3eol3mXykjWto1p", encryptionKey: "a9tcvnK3reshGgwMd3eol3mXykjWto1p")
-//        cloud.analyticsUserName = UIDevice.current.name
+        let cloud = SBPlatformDestination(appID: appID, appSecret: appSecret, encryptionKey: encryptionKey)
+        //        cloud.analyticsUserName = UIDevice.current.name
         beaverLog.addDestination(cloud)
         
         let fileDestination = FileDestination()
