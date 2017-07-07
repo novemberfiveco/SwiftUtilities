@@ -141,6 +141,24 @@ extension Dictionary where Key == String, Value == Value {
     }
 }
 
+extension URL {
+    var queryItems: [URLQueryItem]? {
+        let urlComponents = URLComponents(url: self, resolvingAgainstBaseURL: false)
+        return urlComponents?.queryItems
+    }
+    
+    var queryDictionary: [String: String]? {
+        return queryItems?.reduce([:], { (previous, item) -> [String: String] in
+            if item.value != nil {
+                let aDict = previous
+                return aDict.merged(with: [item.name: item.value!])
+            } else {
+                return previous
+            }
+        })
+    }
+}
+
 extension Bool {
     var stringValue: String {
         return self ? "true" : "false"
