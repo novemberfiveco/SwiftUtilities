@@ -5,21 +5,17 @@
   "homepage": "http://www.novemberfive.co",
   "license": "MIT",
   "authors": {
-    "November Five": "hello@novemberfive.co"
+    "Jens Reynders": "jens.reynders@novemberfive.co"
   },
   "source": {
-    "git": "",
+    "git": "git@bitbucket.org:appstrakt/nove-tool-libraries-appletech-swiftutilities.git",
     "tag": "0.0.1"
   },
   "platforms": {
     "ios": "9.0"
   },
   "source_files": [
-    "Source/Classes/{AP}*.{h,m}",
     "Source/Classes/*.swift"
-  ],
-  "public_header_files": [
-    "Source/Classes/{AP}*.h"
   ],
   "requires_arc": true,
   "frameworks": [
