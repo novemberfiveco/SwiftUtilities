@@ -1,0 +1,11 @@
+# Cocoapods requires the sources of the specs repositories to be set explicitly
+source 'git@bitbucket.org:appstrakt/apps-tool-libraries-appletech-specs-private.git'
+source 'https://github.com/CocoaPods/Specs.git'
+
+abstract_target 'iOS' do
+	target 'SwiftUtilities-Demo'
+	platform :ios, '9.0'
+
+
+	pod 'SwiftUtilities', :path => '../'
+end
