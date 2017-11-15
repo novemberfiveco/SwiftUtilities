@@ -1,0 +1,16 @@
+PODS:
+  - SwiftUtilities (0.0.1)
+
+DEPENDENCIES:
+  - SwiftUtilities (from `../`)
+
+EXTERNAL SOURCES:
+  SwiftUtilities:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  SwiftUtilities: 2f07d3ed166060c1678af509f988d43d1b4884b7
+
+PODFILE CHECKSUM: 970c043c896fe5dc06d6eec2d5b06e1d01c96cc7
+
+COCOAPODS: 1.2.1

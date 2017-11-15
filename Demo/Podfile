@@ -5,6 +5,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 abstract_target 'iOS' do
 	target 'SwiftUtilities-Demo'
 	platform :ios, '9.0'
+	use_frameworks!
 
 
 	pod 'SwiftUtilities', :path => '../'
