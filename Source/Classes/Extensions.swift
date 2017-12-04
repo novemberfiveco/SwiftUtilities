@@ -361,7 +361,7 @@ public extension TimeInterval {
         return .day * 7.0
     }
     
-    public var dateSince1970: Date? {
+    public var dateSince1970: Date {
         return Date(timeIntervalSince1970: self)
     }
 }
