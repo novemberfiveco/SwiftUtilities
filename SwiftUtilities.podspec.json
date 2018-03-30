@@ -1,6 +1,6 @@
 {
   "name": "SwiftUtilities",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "summary": " ",
   "homepage": "http://www.novemberfive.co",
   "license": "MIT",
@@ -9,7 +9,7 @@
   },
   "source": {
     "git": "git@bitbucket.org:appstrakt/nove-tool-libraries-appletech-swiftutilities.git",
-    "tag": "0.0.1"
+    "tag": "0.0.2"
   },
   "platforms": {
     "ios": "9.0"

@@ -284,9 +284,9 @@ public extension UIView {
     /// - Parameters:
     ///   - show: Boolean specifying to show or hide the view.
     ///   - animated: Boolean soecifying to animated the appearance.
-    public func show(_ show:Bool = true, animated:Bool = true) {
+    public func show(_ show: Bool = true, animated: Bool = true, duration: Double = 0.25) {
         let alpha:CGFloat = show ? 1.0 : 0.0
-        let duration = animated ? 0.35 : 0.0
+        let duration = animated ? duration : 0.0
         
         if show {
             isHidden = false
