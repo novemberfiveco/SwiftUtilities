@@ -45,6 +45,10 @@ public extension NSAttributedString {
     public func heightForWidth(_ width: CGFloat) -> Float {
         return ceilf(Float(self.boundingRect(with: CGSize(width: width, height: CGFloat.greatestFiniteMagnitude), options: [.usesLineFragmentOrigin, .usesFontLeading], context: nil).height))
     }
+
+    public func widthForHeight(_ height: CGFloat) -> Float {
+        return ceilf(Float(self.boundingRect(with: CGSize(width: CGFloat.greatestFiniteMagnitude, height: height), options: [.usesLineFragmentOrigin, .usesFontLeading], context: nil).width))
+    }
 }
 
 public extension Double {
