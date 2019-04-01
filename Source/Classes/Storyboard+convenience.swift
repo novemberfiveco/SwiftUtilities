@@ -17,10 +17,10 @@ public protocol StoryboardInstantiable {
 
 public extension StoryboardInstantiable {
     
-    public static var storyboardIdentifier: String? { return String(describing: Self.self) }
-    public static var storyboardBundle: Bundle? { return nil }
+    static var storyboardIdentifier: String? { return String(describing: Self.self) }
+    static var storyboardBundle: Bundle? { return nil }
     
-    public static func instantiate() -> Self {
+    static func instantiate() -> Self {
         let storyboard = UIStoryboard(name: storyboardName, bundle: storyboardBundle)
         
         if let storyboardIdentifier = storyboardIdentifier {

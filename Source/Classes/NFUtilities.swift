@@ -10,7 +10,7 @@ import Foundation
 public class NFUtilities {
     class func localizedString(forKey key:String) -> String {
         let aString = NSLocalizedString(key, comment: "")
-        if aString.characters.count > 0 {
+        if !aString.isEmpty {
             return aString
         } else {
             #if Debug

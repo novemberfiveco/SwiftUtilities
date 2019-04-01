@@ -10,53 +10,53 @@ import UIKit
 
 public extension String {
     /// Length of a string
-    public var length: Int {
+    var length: Int {
         get {
-            return self.characters.count
+            return count
         }
     }
     
     /// Regex check for email conformance.
-    public func isEmail() -> Bool {
+    func isEmail() -> Bool {
         do {
             let regex = try NSRegularExpression(pattern: "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]+$", options: NSRegularExpression.Options.caseInsensitive)
-            return regex.firstMatch(in: self, options: [], range: NSMakeRange(0, self.characters.count)) != nil
+            return regex.firstMatch(in: self, options: [], range: NSMakeRange(0, self.count)) != nil
         } catch { return false }
     }
     
     /// Tries to localize the string. When not present in the localized file, the current value is returned.
-    public func localized() -> String {
+    func localized() -> String {
         return NFUtilities.localizedString(forKey: self)
     }
     
     /// Removes all spaces.
-    public func removingSpaces() -> String{
+    func removingSpaces() -> String{
         return self.replacingOccurrences(of: " ", with: "")
     }
 
-    public var uppercaseFirst: String {
-        let first = String(characters.prefix(1)).capitalized
-        let other = String(characters.dropFirst())
+    var uppercaseFirst: String {
+        let first = String(prefix(1)).capitalized
+        let other = String(dropFirst())
         return first + other
     }
 }
 
 public extension NSAttributedString {
-    public func heightForWidth(_ width: CGFloat) -> Float {
+    func heightForWidth(_ width: CGFloat) -> Float {
         return ceilf(Float(self.boundingRect(with: CGSize(width: width, height: CGFloat.greatestFiniteMagnitude), options: [.usesLineFragmentOrigin, .usesFontLeading], context: nil).height))
     }
 
-    public func widthForHeight(_ height: CGFloat) -> Float {
+    func widthForHeight(_ height: CGFloat) -> Float {
         return ceilf(Float(self.boundingRect(with: CGSize(width: CGFloat.greatestFiniteMagnitude, height: height), options: [.usesLineFragmentOrigin, .usesFontLeading], context: nil).width))
     }
 }
 
 public extension Double {
-    public func format(_ f: String) -> String {
+    func format(_ f: String) -> String {
         return String(format: "%\(f)f", self)
     }
     
-    public func format(for valuta: String) -> String {
+    func format(for valuta: String) -> String {
         var amountString = ""
         var amount = self
         
@@ -70,7 +70,7 @@ public extension Double {
         return amountString
     }
     
-    public var inEuro: String {
+    var inEuro: String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
         formatter.currencySymbol = ""
@@ -91,23 +91,23 @@ public extension Double {
     }
     
     
-    public static var KB: Double {
+    static var KB: Double {
         return 1024
     }
-    public static var MB: Double {
+    static var MB: Double {
         return 1024.0 * .KB
     }
-    public static var GB: Double {
+    static var GB: Double {
         return 1024.0 * .MB
     }
-    public static var TB: Double {
+    static var TB: Double {
         return 1024.0 * .GB
     }
 }
 
-public extension UIViewAnimationCurve {
-    public func toOptions() -> UIViewAnimationOptions {
-        return UIViewAnimationOptions(rawValue: UInt(rawValue << 16))
+public extension UIView.AnimationCurve {
+    func toOptions() -> UIView.AnimationOptions {
+        return UIView.AnimationOptions(rawValue: UInt(rawValue << 16))
     }
 }
 
@@ -117,14 +117,14 @@ public extension Array {
     /// Request item at index safely
     ///
     /// - Parameter index: Item at index, or nil.
-    public subscript (safe index: Int) -> Element? {
+    subscript (safe index: Int) -> Element? {
         return indices ~= index ? self[index] : nil
     }
     
     /// Request item at index safely
     ///
     /// - Parameter index: Item at index, or nil.
-    public subscript (safe index: UInt) -> Element? {
+    subscript (safe index: UInt) -> Element? {
         return indices ~= Int(index) ? self[Int(index)] : nil
     }
     
@@ -132,7 +132,7 @@ public extension Array {
     /// Remove a specific object from the array.
     ///
     /// - Parameter object: Equatable object to be removed.
-    public mutating func remove<U: Equatable>(_ object: U) {
+    mutating func remove<U: Equatable>(_ object: U) {
         var index: Int?
         for (idx, objectToCompare) in self.enumerated() {
             if let to = objectToCompare as? U {
@@ -147,22 +147,22 @@ public extension Array {
         }
     }
     
-    public var commaSeparatedString: String {
+    var commaSeparatedString: String {
         
         guard self.count > 0 else { return "" }
         
-        let string = self.reduce("", { (str, item) in return str + "\(item)," })
-        return string.substring(to: string.index(string.endIndex, offsetBy: -1))
+        let string = reduce("", { (str, item) in return str + "\(item)," })
+        return String(string.dropLast())
     }
 }
 
 public extension Dictionary {
     
-    public mutating func merge(with dictionary: Dictionary) {
+    mutating func merge(with dictionary: Dictionary) {
         dictionary.forEach { updateValue($1, forKey: $0) }
     }
     
-    public func merged(with dictionary: Dictionary) -> Dictionary {
+    func merged(with dictionary: Dictionary) -> Dictionary {
         var dict = self
         dict.merge(with: dictionary)
         return dict
@@ -170,9 +170,9 @@ public extension Dictionary {
 }
 
 public extension Dictionary where Key == String {
-    public var queryString: String {
+    var queryString: String {
         return self.reduce("") { (previous, tupple: (key: String, value: Any)) -> String in
-            if previous.characters.count == 0 {
+            if previous.count == 0 {
                 return previous + "\(tupple.key)=\(tupple.value)"
             }
             return previous + "&\(tupple.key)=\(tupple.value)"
@@ -181,7 +181,7 @@ public extension Dictionary where Key == String {
 }
 
 public extension Dictionary where Value == Any? {
-    public func omitNilValues() -> [Key: Any] {
+    func omitNilValues() -> [Key: Any] {
         var newDict: [Key: Any] = [:]
         
         for aKey in keys {
@@ -194,12 +194,12 @@ public extension Dictionary where Value == Any? {
 }
 
 public extension URL {
-    public var queryItems: [URLQueryItem]? {
+    var queryItems: [URLQueryItem]? {
         let urlComponents = URLComponents(url: self, resolvingAgainstBaseURL: false)
         return urlComponents?.queryItems
     }
     
-    public var queryDictionary: [String: String]? {
+    var queryDictionary: [String: String]? {
         return queryItems?.reduce([:], { (previous, item) -> [String: String] in
             if item.value != nil {
                 let aDict = previous
@@ -212,11 +212,11 @@ public extension URL {
 }
 
 public extension Bool {
-    public var stringValue: String {
+    var stringValue: String {
         return self ? "true" : "false"
     }
     
-    public init(stringValue: String) {
+    init(stringValue: String) {
         if stringValue == "true" {
             self = true
         } else {
@@ -232,12 +232,12 @@ public extension UIViewController {
     /// - Parameters:
     ///   - viewController: The UIViewController to be added as a child.
     ///   - subview: The UIView the viewController should be added in.
-    public func insertChild(_ viewController:UIViewController?, in subview:UIView?) {
+    func insertChild(_ viewController:UIViewController?, in subview:UIView?) {
         if let viewController = viewController {
-            viewController.willMove(toParentViewController: self)
-            self.addChildViewController(viewController)
+            viewController.willMove(toParent: self)
+            self.addChild(viewController)
             subview?.addSubviewWithConstraints(viewController.view)
-            viewController.didMove(toParentViewController: self)
+            viewController.didMove(toParent: self)
         }
     }
 }
@@ -251,7 +251,7 @@ public extension UIView {
     ///   - subview: UIView to connect to.
     ///   - edges: UIEdgeInsets specifying the padding.
     /// - Returns: Array of NSLayoutConstraints.
-    public func constraints(to subview:UIView, edges: UIEdgeInsets? = nil) -> [NSLayoutConstraint] {
+    func constraints(to subview:UIView, edges: UIEdgeInsets? = nil) -> [NSLayoutConstraint] {
         return [
             NSLayoutConstraint(item: self, attribute: .leading, relatedBy: .equal, toItem: subview, attribute: .leading, multiplier: 1, constant: edges?.left ?? 0),
             NSLayoutConstraint(item: self, attribute: .top, relatedBy: .equal, toItem: subview, attribute: .top, multiplier: 1, constant: edges?.top ?? 0),
@@ -266,7 +266,7 @@ public extension UIView {
     /// - Parameters:
     ///   - subview: UIView to connect to.
     ///   - edges: UIEdgeInsets specifying the padding.
-    public func addConstraints(to subview:UIView, edges: UIEdgeInsets? = nil) {
+    func addConstraints(to subview:UIView, edges: UIEdgeInsets? = nil) {
         self.addConstraints(self.constraints(to: subview, edges: edges))
     }
     
@@ -276,7 +276,7 @@ public extension UIView {
     /// - Parameters:
     ///   - view: UIView to add.
     ///   - edges: UIEdgeInsets specifying the padding.
-    public func addSubviewWithConstraints(_ view:UIView, edges: UIEdgeInsets? = nil) {
+    func addSubviewWithConstraints(_ view:UIView, edges: UIEdgeInsets? = nil) {
         view.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(view)
         self.addConstraints(to: view, edges: edges)
@@ -288,7 +288,7 @@ public extension UIView {
     /// - Parameters:
     ///   - show: Boolean specifying to show or hide the view.
     ///   - animated: Boolean soecifying to animated the appearance.
-    public func show(_ show: Bool = true, animated: Bool = true, duration: Double = 0.25) {
+    func show(_ show: Bool = true, animated: Bool = true, duration: Double = 0.25) {
         let alpha:CGFloat = show ? 1.0 : 0.0
         let duration = animated ? duration : 0.0
         
@@ -308,7 +308,7 @@ public extension UIView {
     
     
     /// Triggers layoutIfNeeded() in an animation block of 0.3 secondes in duration.
-    public func animate(_ completion: (() -> ())? = nil) {
+    func animate(_ completion: (() -> ())? = nil) {
         UIView.animate(withDuration: 0.3, animations: {
             self.layoutIfNeeded()
         }) { (_) in
@@ -320,7 +320,7 @@ public extension UIView {
     /// Load class from Nib
     ///
     /// - Returns: Self
-    public class func fromNib() -> Self {
+    class func fromNib() -> Self {
         return fromNib(nibName: nil)
     }
     
@@ -329,7 +329,7 @@ public extension UIView {
     ///
     /// - Parameter nibName: The name of the nib file
     /// - Returns: Self
-    public class func fromNib(nibName: String?) -> Self {
+    class func fromNib(nibName: String?) -> Self {
         func fromNibHelper<T>(nibName: String?) -> T where T : UIView {
             let bundle = Bundle(for: T.self)
             let name = nibName ?? String(describing: T.self)
@@ -341,31 +341,31 @@ public extension UIView {
 
 
 public extension TimeInterval {
-    public func milliSeconds() -> Double {
+    func milliSeconds() -> Double {
         return Double(self * 1000)
     }
     
-    public static var second: TimeInterval {
+    static var second: TimeInterval {
         return 1.0
     }
     
-    public static var minute: TimeInterval {
+    static var minute: TimeInterval {
         return .second * 60.0
     }
     
-    public static var hour: TimeInterval {
+    static var hour: TimeInterval {
         return .minute * 60.0
     }
     
-    public static var day: TimeInterval {
+    static var day: TimeInterval {
         return .hour * 24
     }
     
-    public static var week: TimeInterval {
+    static var week: TimeInterval {
         return .day * 7.0
     }
     
-    public var dateSince1970: Date {
+    var dateSince1970: Date {
         return Date(timeIntervalSince1970: self)
     }
 }
