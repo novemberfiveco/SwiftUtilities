@@ -8,34 +8,33 @@
 import Foundation
 
 public class NFUtilities {
-    class func localizedString(forKey key:String) -> String {
+    class func localizedString(forKey key: String) -> String {
         let aString = NSLocalizedString(key, comment: "")
         if !aString.isEmpty {
             return aString
         } else {
             #if Debug
-            return key
+                return key
             #else
-            return ""
+                return ""
             #endif
         }
     }
-    
-    public static func commaSeparatedStringForIds(_ ids:[Int]) -> String {
-        let string = ids.reduce("", { (str, id) in return str + "\(id)," })
+
+    public static func commaSeparatedStringForIds(_ ids: [Int]) -> String {
+        let string = ids.reduce("") { str, id in str + "\(id)," }
         return string
     }
-    
+
     public static var distanceFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         formatter.minimumFractionDigits = 0
         formatter.maximumFractionDigits = 1
         formatter.locale = Locale.current
-        return formatter;
+        return formatter
     }()
 }
-
 
 /// Filter out only the unique values
 ///
@@ -59,5 +58,21 @@ public func distinct<T: Equatable>(_ source: [T]?) -> [T] {
 ///   - maxValue: Comparable maximum value
 /// - Returns: Clipped value or value
 public func clip<T: Comparable>(min minValue: T, value: T, max maxValue: T) -> T {
-    return min(maxValue,max(value, minValue))
+    return min(maxValue, max(value, minValue))
+}
+
+func delay(_ milliseconds: Int = 200, on queue: DispatchQueue = .main, _ closure: @escaping () -> Void) {
+    queue.asyncAfter(deadline: .now() + .milliseconds(milliseconds)) {
+        closure()
+    }
+}
+
+func queue(_ dispatchQueue: DispatchQueue = .main, _ closure: @escaping () -> Void) {
+    dispatchQueue.async {
+        closure()
+    }
+}
+
+func main(_ closure: @escaping () -> Void) {
+    queue(.main, closure)
 }
