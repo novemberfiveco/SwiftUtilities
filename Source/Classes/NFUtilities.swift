@@ -61,18 +61,32 @@ public func clip<T: Comparable>(min minValue: T, value: T, max maxValue: T) -> T
     return min(maxValue, max(value, minValue))
 }
 
-func delay(_ milliseconds: Int = 200, on queue: DispatchQueue = .main, _ closure: @escaping () -> Void) {
+/// Dispatch to Queue with delay
+///
+/// - Parameters:
+///   - milliseconds: number of milliseconds it will get delayed. Default = 200
+///   - queue: DispatchQueue on which to dispatch. Default = .main
+///   - closure: Code block to execute
+public func delay(_ milliseconds: Int = 200, on queue: DispatchQueue = .main, _ closure: @escaping () -> Void) {
     queue.asyncAfter(deadline: .now() + .milliseconds(milliseconds)) {
         closure()
     }
 }
 
-func queue(_ dispatchQueue: DispatchQueue = .main, _ closure: @escaping () -> Void) {
+/// Dispatch to Queue
+///
+/// - Parameters:
+///   - dispatchQueue: DispatchQueue on which to dispatch. Default = .main
+///   - closure: Code block to execute
+public func queue(_ dispatchQueue: DispatchQueue = .main, _ closure: @escaping () -> Void) {
     dispatchQueue.async {
         closure()
     }
 }
 
-func main(_ closure: @escaping () -> Void) {
+/// Dispatch to main Queue
+///
+/// - Parameter closure: Code block to execute
+public func main(_ closure: @escaping () -> Void) {
     queue(.main, closure)
 }
