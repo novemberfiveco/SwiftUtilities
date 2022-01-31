@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D80E0DE27A7ECB100657AE4 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D80E0DD27A7ECB100657AE4 /* UserDefaults.swift */; };
 		B40FC3931F1CF19900687506 /* Template.h in Headers */ = {isa = PBXBuildFile; fileRef = B40FC3911F1CF19900687506 /* Template.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B40FC39C1F1CF1A600687506 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = B40FC39B1F1CF1A600687506 /* .gitkeep */; };
 		B4C98F891FBC982200F1F824 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C98F881FBC982200F1F824 /* Extensions.swift */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0D80E0DD27A7ECB100657AE4 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		B40FC38E1F1CF19900687506 /* SwiftUtilities.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftUtilities.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B40FC3911F1CF19900687506 /* Template.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Template.h; sourceTree = "<group>"; };
 		B40FC3921F1CF19900687506 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 				B4C98F881FBC982200F1F824 /* Extensions.swift */,
 				B4C98F8A1FBC982700F1F824 /* NFUtilities.swift */,
 				B4C98F8C1FBC985000F1F824 /* Storyboard+convenience.swift */,
+				0D80E0DD27A7ECB100657AE4 /* UserDefaults.swift */,
 				B40FC39B1F1CF1A600687506 /* .gitkeep */,
 			);
 			path = Classes;
@@ -163,6 +166,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0D80E0DE27A7ECB100657AE4 /* UserDefaults.swift in Sources */,
 				B4C98F8B1FBC982700F1F824 /* NFUtilities.swift in Sources */,
 				B4C98F8D1FBC985000F1F824 /* Storyboard+convenience.swift in Sources */,
 				B4C98F891FBC982200F1F824 /* Extensions.swift in Sources */,
