@@ -90,3 +90,10 @@ public func queue(_ dispatchQueue: DispatchQueue = .main, _ closure: @escaping (
 public func main(_ closure: @escaping () -> Void) {
     queue(.main, closure)
 }
+
+
+/// Dispath to a global thread with a utility qos
+/// - Parameter closure: Code block to execute
+public func utility(_ closure: @escaping () -> Void) {
+    queue(.global(qos: .utility), closure)
+}

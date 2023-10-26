@@ -323,13 +323,13 @@ public extension UIView {
     ///
     /// - Parameter nibName: The name of the nib file
     /// - Returns: Self
-    class func fromNib(nibName: String?) -> Self {
-        func fromNibHelper<T>(nibName: String?) -> T where T: UIView {
-            let bundle = Bundle(for: T.self)
+    class func fromNib(nibName: String? = nil, bundle: Bundle? = nil) -> Self {
+        func fromNibHelper<T>(nibName: String?, bundle: Bundle? = nil) -> T where T: UIView {
+            let bundle = bundle ?? Bundle(for: T.self)
             let name = nibName ?? String(describing: T.self)
             return bundle.loadNibNamed(name, owner: nil, options: nil)?.first as? T ?? T()
         }
-        return fromNibHelper(nibName: nibName)
+        return fromNibHelper(nibName: nibName, bundle: bundle)
     }
 }
 
